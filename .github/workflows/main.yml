@@ -1,24 +1,4 @@
-name: Run tests without Docker 
-
-on:
-  workflow_dispatch: 
-
-jobs:
-  build: 
-    runs-on: ubuntu-latest
-    steps: 
-    - uses: actions/checkout@v4
-
-    - name: Install python 
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11' 
-
-    - name: Install requirements
-      run: |
-        pip install -r requirements.txt
-
-    - name: Run tests
+ - name: Run Pytest
       run: |
         pytest -s -v --alluredir=allure-results
 
@@ -41,6 +21,6 @@ jobs:
       if: always()
       uses: peaceiris/actions-gh-pages@v2
       env:
-        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PERSONAL_TOKEN: ${{ secrets.MY_TOKEN }}
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-history
